@@ -36,8 +36,9 @@ GIF created with [Recordit](https://recordit.co/).
 ## Notes
 
 Describe any challenges encountered while building the app.
-To change the default was hard. The design is a challenge for me I created for Iphone 8, but I need to learn how to look good in all Iphones
-Also, I could not remember the bill amount across app restart.
+
+- To change the default was hard. The design is a challenge for me I created for Iphone 8, but I need to learn how to look good in all Iphones
+- Also, I could not remember the bill amount across app restart.
 
 ## License
 
