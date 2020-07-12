@@ -4,7 +4,7 @@
 
 Submitted by: **Priscila Almeida**
 
-Time spent: **6** hours spent in total
+Time spent: **8** hours spent in total
 
 ## User Stories
 
@@ -15,13 +15,13 @@ The following **required** functionality is complete:
 The following **optional** features are implemented:
 * [x] Settings page to change the default tip percentage.
 * [ ] UI animations
-* [ ] Remembering the bill amount across app restarts (if <10mins)
-* [ ] Using locale-specific currency and currency thousands separators.
+* [x] Remembering the bill amount across app restarts (if <10mins)
+* [x] Using locale-specific currency and currency thousands separators.
 * [x] Making sure the keyboard is always visible and the bill amount is always the first responder. This way the user doesn't have to tap anywhere to use this app. Just launch the app and start typing.
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] List anything else that you can get done to improve the app functionality!
 - [x] Added split account
 - [x] Added change default color background
 
@@ -29,7 +29,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://g.recordit.co/UPXBb3UIaI.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/ukyCTsZxcK.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [Recordit](https://recordit.co/).
 
@@ -38,7 +38,6 @@ GIF created with [Recordit](https://recordit.co/).
 Describe any challenges encountered while building the app.
 
 - To change the default was hard. The design is a challenge for me I created for Iphone 8, but I need to learn how to look good in all Iphones
-- Also, I could not remember the bill amount across app restart.
 
 ## License
 
