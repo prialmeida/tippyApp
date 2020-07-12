@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class ViewController: UIViewController {
     
     var secondView = SettingsViewController() //Creates an instace of the settings class
@@ -28,14 +30,34 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var mainView: UIView!
     
+   
     
+    let billDefaults = UserDefaults.standard // holds the percentage default
+    
+   
+    
+       var splitNumPeople = 1
+       var total=0.00
+       var tipPercentages = [0.15, 0.18, 0.2]
+       
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        
+      //Remembering the bill amount across app restarts (if <10mins)
+      let previousTime = billDefaults.object(forKey: "billTime") as! NSDate
+      
+      if( billDefaults.object(forKey: "value") != nil)
+      {
+        if NSDate().timeIntervalSinceReferenceDate - previousTime.timeIntervalSinceReferenceDate < 10*60
+            {
+                billField.text = billDefaults.object(forKey: "value") as? String
+             
+            }
+        }
         
     }
     
@@ -55,8 +77,9 @@ class ViewController: UIViewController {
         //Getting default colors
         changeColors()
         
-      
-        
+       
+            
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,13 +88,21 @@ class ViewController: UIViewController {
         billField.becomeFirstResponder() //Keyboard will show as soon as the app open
            
        }
-
     
-    var splitNumPeople = 1
-    var total=0.00
-    var tipPercentages = [0.15, 0.18, 0.2]
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //Get the bill amount
+        
+        billDefaults.set(billField.text, forKey: "value")
+        billDefaults.set(NSDate(), forKey: "billTime")
+        
+        billDefaults.synchronize()
+        
+    }
     
-
+    
+   
     //This method will allow user to choose how many people will be spliting the bill
     @IBAction func stepperButton(_ sender: UIStepper) {
         
@@ -89,6 +120,7 @@ class ViewController: UIViewController {
     @IBAction func onTap(_ sender: Any) {
         
         view.endEditing(true)
+        
     }
     
     //This method calculates how much will be the tip and the total bill depending in which percentage the user chooses
@@ -103,14 +135,26 @@ class ViewController: UIViewController {
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         total = bill + tip
         
-    
-        //Update the tip and total labels
-        tipLabel.text = String.init(format: "$%.2f", tip)
-        totalLabel.text = String.init(format: "$%.2f", total)
+       
+        
+        //Update the tip and total labels using local currency
+        tipLabel.text = convertDoubleToCurrency(amount: tip)
+        totalLabel.text = convertDoubleToCurrency(amount: total)
         let totalSplit = total / Double(splitNumPeople)
-        totalPerPerson.text = String.init(format: "$%.2f", totalSplit)
+        totalPerPerson.text = convertDoubleToCurrency(amount: totalSplit)
         
     }
+    
+    
+    //This method will get the local currency
+    func convertDoubleToCurrency(amount: Double) -> String{
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        numberFormatter.locale = Locale.current
+        return numberFormatter.string(from: NSNumber(value: amount))!
+    }
+    
+    
     
     //This method will change the colors of the app depending in what the user chooses
     func changeColors()
